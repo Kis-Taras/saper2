@@ -20,13 +20,11 @@ def setup_logging(path='logger.yml', level=logging.INFO, env_key='LOG_CONFIG'):
 
 def main():
     loader = CoinbaseLoader()
-    
-    # Змінено datetime.strptime на рядки '%Y-%m-%d' 
+  
     df_1 = loader.get_historical_data("btc-usdt", "2023-01-01", "2023-02-01", Granularity.SIX_HOURS)
     df_2 = loader.get_historical_data("sol-usdt", "2023-01-01", "2023-02-01", Granularity.SIX_HOURS)
     df_3 = loader.get_historical_data("near-usdt", "2023-01-01", "2023-02-01", Granularity.SIX_HOURS)
 
-    # здійснюємо аналіз
     df_1['Середні20'] = df_1['close'].rolling(window=20).mean()
     df_1['Середні50'] = df_1['close'].rolling(window=50).mean()
     
